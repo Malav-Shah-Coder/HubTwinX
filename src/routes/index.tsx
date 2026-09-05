@@ -801,7 +801,7 @@ function HubTwinX() {
             className="absolute inset-0 -z-10"
             style={{
               background:
-                "linear-gradient(180deg, oklch(0.17 0.032 254 / 92%), oklch(0.17 0.032 254 / 78%))",
+                "linear-gradient(180deg, var(--bg-gradient-top), var(--bg-gradient-bottom))"
             }}
           />
           <div className="mx-auto max-w-4xl px-5 text-center lg:px-8">

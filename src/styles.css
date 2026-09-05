@@ -77,6 +77,8 @@
   --brand-lime: oklch(0.83 0.19 128);
 
   --background: oklch(0.17 0.032 254);
+  --bg-gradient-top: oklch(0.17 0.032 254 / 92%);
+  --bg-gradient-bottom: oklch(0.17 0.032 254 / 78%);
   --foreground: oklch(0.97 0.006 240);
   --card: oklch(0.21 0.034 254);
   --card-foreground: oklch(0.97 0.006 240);
@@ -242,6 +244,8 @@
 
 .light-theme {
   --background: oklch(0.98 0.01 240);
+  --bg-gradient-top: oklch(0.98 0.01 240 / 92%);
+  --bg-gradient-bottom: oklch(0.98 0.01 240 / 78%);
   --foreground: oklch(0.17 0.032 254);
   --card: oklch(0.98 0.01 240);
   --card-foreground: oklch(0.17 0.032 254);

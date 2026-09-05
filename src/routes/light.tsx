@@ -172,7 +172,7 @@ const architecture = [
 
 function LightHubTwinX() {
   return (
-    <div id="top" className="light-theme overflow-x-hidden bg-background text-foreground min-h-screen">
+    <div id="top" className="overflow-x-hidden">
       <Nav />
 
       <main>
@@ -801,7 +801,7 @@ function LightHubTwinX() {
             className="absolute inset-0 -z-10"
             style={{
               background:
-                "linear-gradient(180deg, oklch(0.98 0.01 240 / 92%), oklch(0.98 0.01 240 / 78%))",
+                "linear-gradient(180deg, var(--bg-gradient-top), var(--bg-gradient-bottom))"
             }}
           />
           <div className="mx-auto max-w-4xl px-5 text-center lg:px-8">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import logo from "@/assets/hubtwinx-logo.png.asset.json";
 
 const links = [
@@ -14,6 +14,32 @@ const links = [
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const isLightStored = localStorage.getItem("theme") === "light";
+    setIsLight(isLightStored);
+    if (isLightStored) {
+      document.documentElement.classList.add("light-theme");
+    } else {
+      document.documentElement.classList.remove("light-theme");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsLight((prev) => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.classList.add("light-theme");
+        localStorage.setItem("theme", "light");
+      } else {
+        document.documentElement.classList.remove("light-theme");
+        localStorage.setItem("theme", "dark");
+      }
+      return next;
+    });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -54,6 +80,13 @@ export function Nav() {
         </div>
 
         <div className="flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="rounded-full border border-border p-2 text-foreground transition-colors hover:bg-secondary/50"
+          >
+            {isLight ? <Sun className="size-5" /> : <Moon className="size-5" />}
+          </button>
           <a
             href="#contact"
             className="hidden rounded-full px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:scale-[1.03] sm:inline-flex"
