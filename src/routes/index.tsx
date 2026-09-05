@@ -294,7 +294,7 @@ function HubTwinX() {
                 <p className="eyebrow">Disconnected systems → one digital twin</p>
                 <svg viewBox="0 0 460 380" className="mt-4 w-full" role="img" aria-label="Separate site systems connecting into one HubTwinX digital environment">
                   <defs>
-                    <linearGradient id="connGrad" x1="0" y1="0" x2="1" y2="1">
+                    <linearGradient id="connGrad" x1="0" y1="0" x2="460" y2="380" gradientUnits="userSpaceOnUse">
                       <stop offset="0%" stopColor="oklch(0.55 0.16 253)" />
                       <stop offset="60%" stopColor="oklch(0.73 0.13 205)" />
                       <stop offset="100%" stopColor="oklch(0.72 0.19 148)" />
@@ -335,12 +335,7 @@ function HubTwinX() {
                   ))}
                   <circle cx="230" cy="190" r="52" fill="oklch(0.55 0.16 253 / 18%)" stroke="url(#connGrad)" strokeWidth="1.6" />
                   <circle cx="230" cy="190" r="70" fill="none" stroke="url(#connGrad)" strokeWidth="0.8" opacity="0.4" className="pulse-node" />
-                  <text x="230" y="187" textAnchor="middle" className="fill-foreground font-semibold text-[13px]">
-                    HubTwinX™
-                  </text>
-                  <text x="230" y="205" textAnchor="middle" className="fill-muted-foreground text-[11px]">
-                    Digital Twin
-                  </text>
+                  <image href="/logo-vr.png" x="190" y="150" width="80" height="80" />
                 </svg>
               </div>
             </Reveal>
