@@ -40,7 +40,7 @@ export function TwinLayers() {
         <Reveal as="li" key={layer.id} delay={i * 60}>
           <div className="surface-panel relative p-5 sm:p-6">
             <span
-              className="absolute -left-[34px] top-8 hidden size-3 rounded-full sm:block"
+              className="absolute -left-[47px] top-8 hidden size-3 rounded-full sm:block"
               style={{ backgroundImage: "var(--gradient-brand)" }}
             />
             <div className="flex flex-wrap items-baseline gap-4">
