@@ -688,7 +688,7 @@ function LightHubTwinX() {
             <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
               <Reveal>
                 <div className="surface-panel h-full p-6">
-                  <p className="eyebrow">PowerTwinX™</p>
+                  <img src="/logo-ptx.png" alt="PowerTwinX" className="h-7 w-auto object-contain" />
                   <p className="mt-3 font-display text-xl font-semibold">
                     The digital twin of the power network
                   </p>
@@ -719,7 +719,7 @@ function LightHubTwinX() {
 
               <Reveal delay={140}>
                 <div className="surface-panel h-full p-6">
-                  <p className="eyebrow">HubTwinX™</p>
+                  <img src="/hubtwinx.png" alt="HubTwinX" className="h-7 w-auto object-contain" />
                   <p className="mt-3 font-display text-xl font-semibold">
                     The digital twin of the end-user site
                   </p>
