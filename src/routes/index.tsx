@@ -822,7 +822,7 @@ function HubTwinX() {
         <section id="contact" className="scroll-mt-24 border-t border-border py-20 sm:py-28">
           <div className="mx-auto max-w-5xl px-5 text-center lg:px-8">
             <Reveal>
-              <img src={logo.url} alt="HubTwinX" width={320} height={85} className="mx-auto h-12 w-auto" loading="lazy" />
+              <img src="/hubtwinx.png" alt="HubTwinX" width={320} height={85} className="mx-auto h-12 w-auto" loading="lazy" />
               <h2 className="mt-9 font-display text-3xl font-bold leading-[1.05] sm:text-5xl">
                 READY TO SEE YOUR ENTIRE HUB{" "}
                 <span className="text-gradient-brand">DIFFERENTLY?</span>
@@ -856,7 +856,7 @@ function HubTwinX() {
       <footer className="border-t border-border bg-secondary/20 py-14">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1.4fr_1fr] lg:px-8">
           <div>
-            <img src={logo.url} alt="HubTwinX" width={240} height={64} loading="lazy" className="h-9 w-auto" />
+            <img src="/hubtwinx.png" alt="HubTwinX" width={240} height={64} loading="lazy" className="h-9 w-auto" />
             <p className="mt-5 max-w-md text-sm text-muted-foreground">
               Your Entire Hub. One Digital View. Everything at Your Fingertips.
             </p>
