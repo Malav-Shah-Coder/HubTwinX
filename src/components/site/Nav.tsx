@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import logo from "@/assets/hubtwinx-logo.png.asset.json";
 
 const links = [
-  { label: "Platform", href: "#platform" },
-  { label: "Capabilities", href: "#capabilities" },
-  { label: "Technology", href: "#technology" },
-  { label: "Applications", href: "#applications" },
-  { label: "PowerTwinX", href: "#powertwinx" },
-  { label: "About", href: "#about" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Nav() {
@@ -49,56 +48,49 @@ export function Nav() {
   }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "border-b border-border bg-background/85 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 lg:px-8">
-        <a href="#top" className="flex items-center gap-2">
+    <header className="fixed inset-x-4 sm:inset-x-6 top-4 sm:top-6 z-50">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-3 rounded-full shadow-2xl transition-all duration-500 bg-foreground text-background border border-background/10">
+        <Link to="/" className="flex items-center gap-2">
           <img
             src="/hubtwinx.png"
             alt="HubTwinX by EnerSpace Technology LLP"
             width={300}
             height={53}
-            className="h-11 w-auto"
+            className="h-9 w-auto transition-all"
           />
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-8 lg:flex">
           {links.map((l) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              to={l.href}
+              className="text-sm font-medium text-background/80 transition-colors hover:text-brand-cyan"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="rounded-full border border-border p-2 text-foreground transition-colors hover:bg-secondary/50"
+            className="rounded-full border border-background/20 p-2 text-background transition-colors hover:bg-background/10"
           >
-            {isLight ? <Sun className="size-5" /> : <Moon className="size-5" />}
+            {isLight ? <Sun className="size-4" /> : <Moon className="size-4" />}
           </button>
-          <a
-            href="#contact"
-            className="hidden rounded-full px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:scale-[1.03] sm:inline-flex"
-            style={{ backgroundImage: "var(--gradient-brand)" }}
+          <Link
+            to="/demo"
+            className="hidden rounded-full bg-background px-6 py-2.5 text-sm font-bold text-foreground transition-transform duration-300 hover:scale-[1.03] sm:inline-flex shadow-sm"
           >
-            Book a Demo
-          </a>
+            Request Demo
+          </Link>
           <button
             type="button"
             aria-label="Toggle navigation"
             onClick={() => setOpen((v) => !v)}
-            className="rounded-full border border-border p-2 text-foreground lg:hidden"
+            className="rounded-full border border-background/20 p-2 text-background lg:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -106,17 +98,17 @@ export function Nav() {
       </nav>
 
       {open && (
-        <div className="border-t border-border bg-background/95 px-5 py-4 backdrop-blur-xl lg:hidden">
-          <ul className="flex flex-col gap-1">
+        <div className="absolute top-20 inset-x-4 rounded-2xl bg-foreground text-background p-5 shadow-2xl border border-background/10 lg:hidden">
+          <ul className="flex flex-col gap-2">
             {links.map((l) => (
               <li key={l.href}>
-                <a
-                  href={l.href}
+                <Link
+                  to={l.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-3 py-2.5 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  className="block rounded-lg px-4 py-3 text-sm font-medium text-background/80 hover:bg-background/10 hover:text-brand-cyan"
                 >
                   {l.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

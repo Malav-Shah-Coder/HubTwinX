@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Bolt,
@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 
 import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { TwinLayers } from "@/components/site/TwinLayers";
 import { TwinDashboard } from "@/components/site/TwinDashboard";
@@ -210,12 +211,12 @@ function HubTwinX() {
                 >
                   Explore HubTwinX <ArrowRight className="size-4" />
                 </a>
-                <a
-                  href="#contact"
+                <Link
+                  to="/demo"
                   className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 font-semibold transition-colors hover:border-primary/60 hover:bg-secondary/50"
                 >
                   Book a Demo
-                </a>
+                </Link>
               </div>
               <p className="mt-10 font-display text-sm tracking-[0.2em] text-muted-foreground">
                 POWER REACHES THE SITE. HUBTWINX MAKES THE SITE INTELLIGENT.
@@ -831,13 +832,13 @@ function HubTwinX() {
                 Discover how HubTwinX can create a Digital Twin of your facility.
               </p>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <a
-                  href="mailto:info@enerspacetechnology.com?subject=HubTwinX%20Demo%20Request"
+                <Link
+                  to="/demo"
                   className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold text-primary-foreground transition-transform duration-300 hover:scale-[1.03]"
                   style={{ backgroundImage: "var(--gradient-brand)" }}
                 >
                   BOOK A DEMO <ArrowRight className="size-4" />
-                </a>
+                </Link>
                 <a
                   href="#platform"
                   className="inline-flex items-center rounded-full border border-border px-8 py-4 font-semibold transition-colors hover:border-primary/60 hover:bg-secondary/50"
@@ -853,47 +854,7 @@ function HubTwinX() {
         </section>
       </main>
 
-      <footer className="border-t border-border bg-secondary/20 py-14">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1.4fr_1fr] lg:px-8">
-          <div>
-            <img src="/hubtwinx.png" alt="HubTwinX" width={240} height={64} loading="lazy" className="h-9 w-auto" />
-            <p className="mt-5 max-w-md text-sm text-muted-foreground">
-              Your Entire Hub. One Digital View. Everything at Your Fingertips.
-            </p>
-            <p className="mt-6 text-sm text-muted-foreground">
-              Developed by{" "}
-              <span className="font-semibold text-foreground">EnerSpace Technology LLP</span>
-            </p>
-          </div>
-          <nav aria-label="Footer">
-            <p className="eyebrow">Navigation</p>
-            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-              {[
-                ["Home", "#top"],
-                ["What is HubTwinX", "#platform"],
-                ["Capabilities", "#capabilities"],
-                ["Technology", "#technology"],
-                ["Applications", "#applications"],
-                ["PowerTwinX + HubTwinX", "#powertwinx"],
-                ["Contact", "#contact"],
-              ].map(([label, href]) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-        <div className="mx-auto mt-10 max-w-7xl border-t border-border px-5 pt-6 text-xs text-muted-foreground lg:px-8">
-          © {new Date().getFullYear()} EnerSpace Technology LLP. HubTwinX™ and PowerTwinX™ are
-          product names of EnerSpace Technology LLP.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
