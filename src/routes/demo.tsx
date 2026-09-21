@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MonitorPlay, Send } from "lucide-react";
+import { MonitorPlay, Send, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { sendDemoEmail } from "@/actions/email";
 
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
@@ -16,6 +19,31 @@ export const Route = createFileRoute("/demo")({
 });
 
 function BookDemo() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Create an object of all form fields based on their 'name' attributes
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries()) as Record<string, string>;
+
+    try {
+      await sendDemoEmail({ data });
+      toast.success("Demo request sent!", {
+        description: "Our experts will be in touch with you shortly."
+      });
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      toast.error("Failed to send request", {
+        description: "Please check your network and try again."
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div id="top" className="overflow-x-hidden">
       <Nav />
@@ -40,7 +68,7 @@ function BookDemo() {
             <div className="surface-panel p-8 sm:p-14 rounded-3xl border border-border shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 p-32 bg-brand-cyan/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
 
-              <form className="relative space-y-8" onSubmit={(e) => e.preventDefault()}>
+              <form className="relative space-y-8" onSubmit={handleSubmit}>
                 
                 {/* Personal Details Row */}
                 <div>
@@ -51,6 +79,7 @@ function BookDemo() {
                       <input 
                         type="text" 
                         id="firstName" 
+                        name="First Name"
                         required
                         className="w-full bg-background/50 border border-border rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:bg-background transition-colors" 
                         placeholder="John" 
@@ -61,6 +90,7 @@ function BookDemo() {
                       <input 
                         type="text" 
                         id="lastName" 
+                        name="Last Name"
                         required
                         className="w-full bg-background/50 border border-border rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:bg-background transition-colors" 
                         placeholder="Doe" 
@@ -76,6 +106,7 @@ function BookDemo() {
                     <input 
                       type="email" 
                       id="email" 
+                      name="Email Address"
                       required
                       className="w-full bg-background/50 border border-border rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:bg-background transition-colors" 
                       placeholder="john@company.com" 
@@ -86,6 +117,7 @@ function BookDemo() {
                     <input 
                       type="tel" 
                       id="phone" 
+                      name="Phone Number"
                       className="w-full bg-background/50 border border-border rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:bg-background transition-colors" 
                       placeholder="+1 (555) 000-0000" 
                     />
@@ -103,6 +135,7 @@ function BookDemo() {
                       <input 
                         type="text" 
                         id="organization" 
+                        name="Company Name"
                         required
                         className="w-full bg-background/50 border border-border rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:bg-background transition-colors" 
                         placeholder="Acme Corp" 
@@ -112,6 +145,7 @@ function BookDemo() {
                       <label htmlFor="facilityType" className="text-sm font-medium text-foreground/90">Facility Type</label>
                       <select 
                         id="facilityType" 
+                        name="Facility Type"
                         required
                         className="w-full bg-background/50 border border-border rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:bg-background transition-colors text-foreground"
                       >
@@ -132,6 +166,7 @@ function BookDemo() {
                   <label htmlFor="interests" className="text-sm font-medium text-foreground/90">What are you looking to achieve?</label>
                   <textarea 
                     id="interests" 
+                    name="Objectives"
                     rows={4}
                     className="w-full bg-background/50 border border-border rounded-xl px-4 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:bg-background transition-colors resize-none" 
                     placeholder="e.g. Energy monitoring, predictive maintenance, automated HVAC..." 
@@ -141,10 +176,16 @@ function BookDemo() {
                 <div className="pt-6 flex justify-center">
                   <button 
                     type="submit" 
-                    className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full px-12 py-4 font-bold text-primary-foreground shadow-lg shadow-brand-cyan/20 transition-transform duration-300 hover:scale-[1.03]"
+                    disabled={isSubmitting}
+                    className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full px-12 py-4 font-bold text-primary-foreground shadow-lg shadow-brand-cyan/20 transition-transform duration-300 hover:scale-[1.03] disabled:opacity-70 disabled:pointer-events-none"
                     style={{ backgroundImage: "var(--gradient-brand)" }}
                   >
-                    <Send className="size-5" /> Execute Demo Request
+                    {isSubmitting ? (
+                      <Loader2 className="size-5 animate-spin" />
+                    ) : (
+                      <Send className="size-5" />
+                    )}
+                    {isSubmitting ? "Sending..." : "Execute Demo Request"}
                   </button>
                 </div>
               </form>

@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { sendDemoEmail } from "@/actions/email";
 
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
@@ -16,6 +19,31 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactUs() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Create an object of all form fields based on their 'name' attributes
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries()) as Record<string, string>;
+
+    try {
+      await sendDemoEmail({ data });
+      toast.success("Message sent successfully!", {
+        description: "Our team will review your inquiry and reach out soon."
+      });
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      toast.error("Failed to send message", {
+        description: "Please check your network and try again."
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div id="top" className="overflow-x-hidden">
       <Nav />
@@ -37,13 +65,15 @@ function ContactUs() {
             {/* Left Column: Form */}
             <Reveal delay={100}>
               <div className="surface-panel p-6 sm:p-8 rounded-2xl">
-                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="firstName" className="text-sm font-medium text-foreground">First Name</label>
                       <input 
                         type="text" 
                         id="firstName" 
+                        name="First Name"
+                        required
                         className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50" 
                         placeholder="John" 
                       />
@@ -53,6 +83,8 @@ function ContactUs() {
                       <input 
                         type="text" 
                         id="lastName" 
+                        name="Last Name"
+                        required
                         className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50" 
                         placeholder="Doe" 
                       />
@@ -64,6 +96,8 @@ function ContactUs() {
                     <input 
                       type="email" 
                       id="email" 
+                      name="Email Address"
+                      required
                       className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50" 
                       placeholder="john@example.com" 
                     />
@@ -74,6 +108,8 @@ function ContactUs() {
                     <input 
                       type="text" 
                       id="organization" 
+                      name="Organization"
+                      required
                       className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50" 
                       placeholder="Company Name" 
                     />
@@ -83,6 +119,8 @@ function ContactUs() {
                     <label htmlFor="inquiryType" className="text-sm font-medium text-foreground">Inquiry Type</label>
                     <select 
                       id="inquiryType" 
+                      name="Inquiry Type"
+                      required
                       className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 text-foreground"
                     >
                       <option value="">Select an option...</option>
@@ -97,7 +135,9 @@ function ContactUs() {
                     <label htmlFor="message" className="text-sm font-medium text-foreground">Message</label>
                     <textarea 
                       id="message" 
+                      name="Message"
                       rows={4}
+                      required
                       className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 resize-none" 
                       placeholder="How can we help you?" 
                     />
@@ -105,10 +145,16 @@ function ContactUs() {
 
                   <button 
                     type="submit" 
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-8 py-3.5 font-semibold text-primary-foreground transition-transform duration-300 hover:scale-[1.02]"
+                    disabled={isSubmitting}
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-8 py-3.5 font-semibold text-primary-foreground transition-transform duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:pointer-events-none"
                     style={{ backgroundImage: "var(--gradient-brand)" }}
                   >
-                    <Send className="size-4" /> Send Message
+                    {isSubmitting ? (
+                      <Loader2 className="size-4 animate-spin" />
+                    ) : (
+                      <Send className="size-4" />
+                    )}
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               </div>

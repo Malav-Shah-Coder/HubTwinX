@@ -85,7 +85,7 @@ export function Footer() {
 
       <div className="mx-auto mt-14 max-w-7xl border-t border-background/20 px-6 pt-8 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-sm text-background/70">
-          © {new Date().getFullYear()} HubTwinX. All rights reserved.
+          © {new Date().getFullYear()} <a href="https://www.hubtwinx.com/">HubTwinX.</a> All rights reserved. Powered By <a href="https://www.arihantsatiate.com/">Arihant Satiate</a> 
         </div>
         <div className="flex items-center gap-6 text-sm text-background/70">
           <Link to="/privacy-policy" className="hover:text-background transition-colors">Privacy Policy</Link>
