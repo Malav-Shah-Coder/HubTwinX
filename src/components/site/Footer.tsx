@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function Footer() {
+  const { t } = useTranslation();
   const [isLight, setIsLight] = useState(false);
 
   useEffect(() => {
@@ -27,21 +29,21 @@ export function Footer() {
             className="h-9 w-auto" 
           />
           <p className="mt-5 text-sm text-background/80 leading-relaxed max-w-sm">
-            HubTwinX is the ultra-premium digital twin platform for modern site environments. Unmatched intelligence, real-time insights, zero compromise.
+            {t("footer.description", "HubTwinX is the ultra-premium digital twin platform for modern site environments. Unmatched intelligence, real-time insights, zero compromise.")}
           </p>
         </div>
 
         {/* Column 2: Quick Links in one column */}
         <nav aria-label="Footer" className="flex-1 lg:px-10 lg:flex lg:justify-center">
           <div>
-            <h3 className="font-semibold text-background mb-3">Quick Links</h3>
+            <h3 className="font-semibold text-background mb-3">{t("footer.quickLinks", "Quick Links")}</h3>
             <ul className="flex flex-col gap-y-2.5">
             {[
-              ["Home", "/"],
-              ["About Us", "/about"],
-              ["Case Studies", "/case-studies"],
-              ["Book a Demo", "/demo"],
-              ["Contact", "/contact"],
+              [t("footer.home", "Home"), "/"],
+              [t("footer.about", "About Us"), "/about"],
+              [t("footer.cases", "Case Studies"), "/case-studies"],
+              [t("footer.demo", "Book a Demo"), "/demo"],
+              [t("footer.contactUs", "Contact"), "/contact"],
             ].map(([label, href]) => (
               <li key={label as string}>
                 <Link
@@ -58,7 +60,7 @@ export function Footer() {
 
         {/* Column 3: Contact */}
         <div className="flex-shrink-0 text-sm lg:max-w-sm">
-          <h3 className="font-semibold text-background mb-4 text-base">Contact</h3>
+          <h3 className="font-semibold text-background mb-4 text-base">{t("footer.contact", "Contact")}</h3>
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
               <MapPin className="size-5 shrink-0 text-brand-cyan mt-0.5" />
@@ -84,12 +86,12 @@ export function Footer() {
       </div>
 
       <div className="mx-auto mt-14 max-w-7xl border-t border-background/20 px-6 pt-8 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="text-sm text-background/70">
-          © {new Date().getFullYear()} <a href="https://www.hubtwinx.com/">HubTwinX.</a> All rights reserved. Powered By <a href="https://www.arihantsatiate.com/">Arihant Satiate</a> 
+        <div className="text-sm text-background/70 notranslate" translate="no">
+           © {new Date().getFullYear()} <a href="https://www.hubtwinx.com/">HubTwinX.</a> All rights reserved. Powered By <a href="https://www.arihantsatiate.com/">Arihant Satiate</a> 
         </div>
         <div className="flex items-center gap-6 text-sm text-background/70">
-          <Link to="/privacy-policy" className="hover:text-background transition-colors">Privacy Policy</Link>
-          <Link to="/terms-conditions" className="hover:text-background transition-colors">Terms & Conditions</Link>
+          <Link to="/privacy-policy" className="hover:text-background transition-colors">{t("footer.privacy", "Privacy Policy")}</Link>
+          <Link to="/terms-conditions" className="hover:text-background transition-colors">{t("footer.terms", "Terms & Conditions")}</Link>
         </div>
       </div>
     </footer>

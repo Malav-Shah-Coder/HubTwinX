@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "sonner";
+import { LanguageSwitcher } from "@/components/site/LanguageSwitcher";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../i18n";
 
 function NotFoundComponent() {
   return (
@@ -122,9 +125,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
-      <Toaster position="bottom-right" theme="dark" className="font-display font-medium" />
+      <I18nextProvider i18n={i18n}>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+        <LanguageSwitcher />
+        <Toaster position="bottom-right" theme="dark" className="font-display font-medium" />
+      </I18nextProvider>
     </QueryClientProvider>
   );
 }

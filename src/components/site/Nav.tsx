@@ -3,14 +3,19 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import logo from "@/assets/hubtwinx-logo.png.asset.json";
 
-const links = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Contact", href: "/contact" },
+export const getNavLinks = (t: any) => [
+  { label: t("nav.home", "Home"), href: "/" },
+  { label: t("nav.about", "About Us"), href: "/about" },
+  { label: t("nav.caseStudies", "Case Studies"), href: "/case-studies" },
+  { label: t("nav.contact", "Contact"), href: "/contact" },
 ];
 
+import { useTranslation } from "react-i18next";
+
 export function Nav() {
+  const { t } = useTranslation();
+  const links = getNavLinks(t);
+
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 

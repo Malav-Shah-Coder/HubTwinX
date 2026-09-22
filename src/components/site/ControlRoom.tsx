@@ -3,65 +3,70 @@ import { BatteryCharging, Fan, Lightbulb, Plug, Sun, Gauge } from "lucide-react"
 
 type SystemKey = "lighting" | "hvac" | "battery" | "ev" | "solar" | "equipment";
 
-const systems: {
+import { useTranslation } from "react-i18next";
+
+const getSystems = (t: any): {
   key: SystemKey;
   label: string;
   icon: typeof Fan;
   onLabel: string;
   offLabel: string;
   note: string;
-}[] = [
+}[] => [
   {
     key: "lighting",
-    label: "Lighting",
+    label: t("home.controlRoom.l1", "Lighting"),
     icon: Lightbulb,
-    onLabel: "Zones active",
-    offLabel: "Zones off",
-    note: "Switch lighting zones on or off across floors and areas.",
+    onLabel: t("home.controlRoom.on1", "Zones active"),
+    offLabel: t("home.controlRoom.off1", "Zones off"),
+    note: t("home.controlRoom.n1", "Switch lighting zones on or off across floors and areas."),
   },
   {
     key: "hvac",
-    label: "HVAC",
+    label: t("home.controlRoom.l2", "HVAC"),
     icon: Fan,
-    onLabel: "Cooling active",
-    offLabel: "Standby",
-    note: "Adjust HVAC operation based on conditions and schedules.",
+    onLabel: t("home.controlRoom.on2", "Cooling active"),
+    offLabel: t("home.controlRoom.off2", "Standby"),
+    note: t("home.controlRoom.n2", "Adjust HVAC operation based on conditions and schedules."),
   },
   {
     key: "battery",
-    label: "Battery",
+    label: t("home.controlRoom.l3", "Battery"),
     icon: BatteryCharging,
-    onLabel: "Discharging to site",
-    offLabel: "Idle",
-    note: "Change how stored energy supports the site.",
+    onLabel: t("home.controlRoom.on3", "Discharging to site"),
+    offLabel: t("home.controlRoom.off3", "Idle"),
+    note: t("home.controlRoom.n3", "Change how stored energy supports the site."),
   },
   {
     key: "ev",
-    label: "EV Charging",
+    label: t("home.controlRoom.l4", "EV Charging"),
     icon: Plug,
-    onLabel: "Charging",
-    offLabel: "Paused",
-    note: "Manage charging points and charging state.",
+    onLabel: t("home.controlRoom.on4", "Charging"),
+    offLabel: t("home.controlRoom.off4", "Paused"),
+    note: t("home.controlRoom.n4", "Manage charging points and charging state."),
   },
   {
     key: "solar",
-    label: "Solar",
+    label: t("home.controlRoom.l5", "Solar"),
     icon: Sun,
-    onLabel: "Exporting to site",
-    offLabel: "Curtailed",
-    note: "See and manage on-site generation.",
+    onLabel: t("home.controlRoom.on5", "Exporting to site"),
+    offLabel: t("home.controlRoom.off5", "Curtailed"),
+    note: t("home.controlRoom.n5", "See and manage on-site generation."),
   },
   {
     key: "equipment",
-    label: "Equipment",
+    label: t("home.controlRoom.l6", "Equipment"),
     icon: Gauge,
-    onLabel: "Running",
-    offLabel: "Stopped",
-    note: "Monitor critical equipment and respond to alerts.",
+    onLabel: t("home.controlRoom.on6", "Running"),
+    offLabel: t("home.controlRoom.off6", "Stopped"),
+    note: t("home.controlRoom.n6", "Monitor critical equipment and respond to alerts."),
   },
 ];
 
 export function ControlRoom() {
+  const { t } = useTranslation();
+  const systems = getSystems(t);
+
   const [state, setState] = useState<Record<SystemKey, boolean>>({
     lighting: true,
     hvac: true,
@@ -78,8 +83,8 @@ export function ControlRoom() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr]">
       <div className="surface-panel p-5 sm:p-6">
-        <p className="eyebrow">Site control</p>
-        <h3 className="mt-2 text-xl font-semibold">Connected systems</h3>
+        <p className="eyebrow">{t("home.controlRoom.eyebrow", "Site control")}</p>
+        <h3 className="mt-2 text-xl font-semibold">{t("home.controlRoom.title1", "Connected systems")}</h3>
         <ul className="mt-5 grid gap-3 sm:grid-cols-2">
           {systems.map((s) => {
             const on = state[s.key];
@@ -133,11 +138,11 @@ export function ControlRoom() {
       <div className="surface-panel relative overflow-hidden p-5 sm:p-6">
         <div className="flex items-center justify-between">
           <div>
-            <p className="eyebrow">Digital twin</p>
-            <h3 className="mt-2 text-xl font-semibold">Live site view</h3>
+            <p className="eyebrow">{t("home.controlRoom.eyebrow2", "Digital twin")}</p>
+            <h3 className="mt-2 text-xl font-semibold">{t("home.controlRoom.title2", "Live site view")}</h3>
           </div>
           <p className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
-            {activeCount}/6 systems active
+            {activeCount}/6 {t("home.controlRoom.active", "systems active")}
           </p>
         </div>
 
@@ -210,8 +215,7 @@ export function ControlRoom() {
         </svg>
 
         <p className="text-sm text-muted-foreground">
-          Select a system to see how visibility turns into action. This is an illustrative
-          representation of the HubTwinX™ control layer.
+          {t("home.controlRoom.footer", "Select a system to see how visibility turns into action. This is an illustrative representation of the HubTwinX™ control layer.")}
         </p>
       </div>
     </div>

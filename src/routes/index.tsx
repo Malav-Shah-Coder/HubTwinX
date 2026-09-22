@@ -31,6 +31,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { TwinLayers } from "@/components/site/TwinLayers";
 import { TwinDashboard } from "@/components/site/TwinDashboard";
 import { ControlRoom } from "@/components/site/ControlRoom";
+import { useTranslation } from "react-i18next";
 
 import logo from "@/assets/hubtwinx-logo.png.asset.json";
 import heroImg from "@/assets/hero-digital-twin.jpg";
@@ -80,98 +81,106 @@ function SectionHeading({
   );
 }
 
-const scrollStory = [
-  { n: "01", t: "Power arrives", d: "The site receives energy." },
-  { n: "02", t: "The site becomes visible", d: "Meters, systems, assets and spaces are digitally represented." },
-  { n: "03", t: "Everything connects", d: "IoT connects the physical environment." },
-  { n: "04", t: "The digital twin forms", d: "The physical site gets a digital representation." },
-  { n: "05", t: "Intelligence emerges", d: "AI and analytics identify patterns and opportunities." },
-  { n: "06", t: "Decisions become action", d: "Users can monitor and control connected systems." },
-  { n: "07", t: "Automation takes over", d: "Rules and workflows can trigger predefined actions." },
-  { n: "08", t: "The site becomes intelligent", d: "Energy, assets and operations become visible, understandable and actionable." },
+const getScrollStory = (t: any) => [
+  { n: "01", t: t("home.scrollStory.t1", "Power arrives"), d: t("home.scrollStory.d1", "The site receives energy.") },
+  { n: "02", t: t("home.scrollStory.t2", "The site becomes visible"), d: t("home.scrollStory.d2", "Meters, systems, assets and spaces are digitally represented.") },
+  { n: "03", t: t("home.scrollStory.t3", "Everything connects"), d: t("home.scrollStory.d3", "IoT connects the physical environment.") },
+  { n: "04", t: t("home.scrollStory.t4", "The digital twin forms"), d: t("home.scrollStory.d4", "The physical site gets a digital representation.") },
+  { n: "05", t: t("home.scrollStory.t5", "Intelligence emerges"), d: t("home.scrollStory.d5", "AI and analytics identify patterns and opportunities.") },
+  { n: "06", t: t("home.scrollStory.t6", "Decisions become action"), d: t("home.scrollStory.d6", "Users can monitor and control connected systems.") },
+  { n: "07", t: t("home.scrollStory.t7", "Automation takes over"), d: t("home.scrollStory.d7", "Rules and workflows can trigger predefined actions.") },
+  { n: "08", t: t("home.scrollStory.t8", "The site becomes intelligent"), d: t("home.scrollStory.d8", "Energy, assets and operations become visible, understandable and actionable.") },
 ];
 
-const capabilities = [
-  { icon: Bolt, t: "Energy Management", d: "Understand where, when and how energy is being consumed." },
-  { icon: Boxes, t: "Asset Management", d: "Know important assets, their location, condition and operational status." },
-  { icon: Building, t: "Facility Management", d: "Bring building systems into one digital environment." },
-  { icon: Wrench, t: "Predictive Maintenance", d: "Identify abnormal behaviour before it becomes a major problem." },
-  { icon: Workflow, t: "Automation", d: "Create intelligent rules and workflows for connected systems." },
-  { icon: Leaf, t: "Sustainability", d: "Measure and optimize energy performance, renewable generation and consumption." },
+const getCapabilities = (t: any) => [
+  { icon: Bolt, t: t("home.capabilities.t1", "Energy Management"), d: t("home.capabilities.d1", "Understand where, when and how energy is being consumed.") },
+  { icon: Boxes, t: t("home.capabilities.t2", "Asset Management"), d: t("home.capabilities.d2", "Know important assets, their location, condition and operational status.") },
+  { icon: Building, t: t("home.capabilities.t3", "Facility Management"), d: t("home.capabilities.d3", "Bring building systems into one digital environment.") },
+  { icon: Wrench, t: t("home.capabilities.t4", "Predictive Maintenance"), d: t("home.capabilities.d4", "Identify abnormal behaviour before it becomes a major problem.") },
+  { icon: Workflow, t: t("home.capabilities.t5", "Automation"), d: t("home.capabilities.d5", "Create intelligent rules and workflows for connected systems.") },
+  { icon: Leaf, t: t("home.capabilities.t6", "Sustainability"), d: t("home.capabilities.d6", "Measure and optimize energy performance, renewable generation and consumption.") },
 ];
 
-const applications = [
-  { icon: Home, t: "Residential", d: "Smart homes, villas, apartments" },
-  { icon: Building, t: "Commercial", d: "Offices, malls, retail, commercial buildings" },
-  { icon: Factory, t: "Industrial", d: "Factories, plants, warehouses, production facilities" },
-  { icon: Stethoscope, t: "Healthcare", d: "Hospitals, clinics and healthcare campuses" },
-  { icon: Hotel, t: "Hospitality", d: "Hotels, resorts and restaurants" },
-  { icon: GraduationCap, t: "Institutional", d: "Schools, universities and campuses" },
-  { icon: Sun, t: "Energy", d: "Solar, battery, EV charging and distributed energy sites" },
+const getApplications = (t: any) => [
+  { icon: Home, t: t("home.applications.t1", "Residential"), d: t("home.applications.d1", "Smart homes, villas, apartments") },
+  { icon: Building, t: t("home.applications.t2", "Commercial"), d: t("home.applications.d2", "Offices, malls, retail, commercial buildings") },
+  { icon: Factory, t: t("home.applications.t3", "Industrial"), d: t("home.applications.d3", "Factories, plants, warehouses, production facilities") },
+  { icon: Stethoscope, t: t("home.applications.t4", "Healthcare"), d: t("home.applications.d4", "Hospitals, clinics and healthcare campuses") },
+  { icon: Hotel, t: t("home.applications.t5", "Hospitality"), d: t("home.applications.d5", "Hotels, resorts and restaurants") },
+  { icon: GraduationCap, t: t("home.applications.t6", "Institutional"), d: t("home.applications.d6", "Schools, universities and campuses") },
+  { icon: Sun, t: t("home.applications.t7", "Energy"), d: t("home.applications.d7", "Solar, battery, EV charging and distributed energy sites") },
 ];
 
-const whyItems = [
-  { icon: Eye, t: "One View", d: "Bring disconnected systems into one digital environment." },
-  { icon: Radio, t: "Real-Time", d: "Understand what is happening now." },
-  { icon: Brain, t: "Intelligent", d: "Turn operational data into actionable insights." },
-  { icon: Network, t: "Connected", d: "Connect meters, sensors, assets and equipment." },
-  { icon: Layers, t: "Scalable", d: "Start with energy and expand to the entire site." },
-  { icon: Gauge, t: "Control", d: "Move beyond monitoring to intelligent action." },
-  { icon: ShieldCheck, t: "Future Ready", d: "Built for AI, automation, distributed energy and smart infrastructure." },
+const getWhyItems = (t: any) => [
+  { icon: Eye, t: t("home.why.t1", "One View"), d: t("home.why.d1", "Bring disconnected systems into one digital environment.") },
+  { icon: Radio, t: t("home.why.t2", "Real-Time"), d: t("home.why.d2", "Understand what is happening now.") },
+  { icon: Brain, t: t("home.why.t3", "Intelligent"), d: t("home.why.d3", "Turn operational data into actionable insights.") },
+  { icon: Network, t: t("home.why.t4", "Connected"), d: t("home.why.d4", "Connect meters, sensors, assets and equipment.") },
+  { icon: Layers, t: t("home.why.t5", "Scalable"), d: t("home.why.d5", "Start with energy and expand to the entire site.") },
+  { icon: Gauge, t: t("home.why.t6", "Control"), d: t("home.why.d6", "Move beyond monitoring to intelligent action.") },
+  { icon: ShieldCheck, t: t("home.why.t7", "Future Ready"), d: t("home.why.d7", "Built for AI, automation, distributed energy and smart infrastructure.") },
 ];
 
-const workflows = [
+const getWorkflows = (t: any) => [
   {
-    tag: "Environment",
+    tag: t("home.workflows.tag1", "Environment"),
     steps: [
-      ["Condition", "Temperature rises"],
-      ["Intelligence", "HubTwinX identifies the condition"],
-      ["Rule", "If temperature exceeds a defined threshold"],
-      ["Action", "Adjust HVAC"],
-      ["Result", "Optimized environment"],
+      [t("home.workflows.label1", "Condition"), t("home.workflows.val1a", "Temperature rises")],
+      [t("home.workflows.label2", "Intelligence"), t("home.workflows.val1b", "HubTwinX identifies the condition")],
+      [t("home.workflows.label3", "Rule"), t("home.workflows.val1c", "If temperature exceeds a defined threshold")],
+      [t("home.workflows.label4", "Action"), t("home.workflows.val1d", "Adjust HVAC")],
+      [t("home.workflows.label5", "Result"), t("home.workflows.val1e", "Optimized environment")],
     ],
   },
   {
-    tag: "Energy",
+    tag: t("home.workflows.tag2", "Energy"),
     steps: [
-      ["Condition", "High demand detected"],
-      ["Intelligence", "Demand pattern identified"],
-      ["Rule", "If demand exceeds a defined threshold"],
-      ["Action", "Intelligent response to optimize load"],
-      ["Result", "Balanced consumption"],
+      [t("home.workflows.label1", "Condition"), t("home.workflows.val2a", "High demand detected")],
+      [t("home.workflows.label2", "Intelligence"), t("home.workflows.val2b", "Demand pattern identified")],
+      [t("home.workflows.label3", "Rule"), t("home.workflows.val2c", "If demand exceeds a defined threshold")],
+      [t("home.workflows.label4", "Action"), t("home.workflows.val2d", "Intelligent response to optimize load")],
+      [t("home.workflows.label5", "Result"), t("home.workflows.val2e", "Balanced consumption")],
     ],
   },
   {
-    tag: "Lighting",
+    tag: t("home.workflows.tag3", "Lighting"),
     steps: [
-      ["Condition", "Occupancy detected"],
-      ["Intelligence", "Space usage understood"],
-      ["Rule", "If a space is occupied or vacant"],
-      ["Action", "Lighting response"],
-      ["Result", "Efficient operation"],
+      [t("home.workflows.label1", "Condition"), t("home.workflows.val3a", "Occupancy detected")],
+      [t("home.workflows.label2", "Intelligence"), t("home.workflows.val3b", "Space usage understood")],
+      [t("home.workflows.label3", "Rule"), t("home.workflows.val3c", "If a space is occupied or vacant")],
+      [t("home.workflows.label4", "Action"), t("home.workflows.val3d", "Lighting response")],
+      [t("home.workflows.label5", "Result"), t("home.workflows.val3e", "Efficient operation")],
     ],
   },
   {
-    tag: "Equipment",
+    tag: t("home.workflows.tag4", "Equipment"),
     steps: [
-      ["Condition", "Abnormal behaviour"],
-      ["Intelligence", "Deviation identified"],
-      ["Rule", "If behaviour falls outside expected operation"],
-      ["Action", "Alert raised"],
-      ["Result", "Maintenance response"],
+      [t("home.workflows.label1", "Condition"), t("home.workflows.val4a", "Abnormal behaviour")],
+      [t("home.workflows.label2", "Intelligence"), t("home.workflows.val4b", "Deviation identified")],
+      [t("home.workflows.label3", "Rule"), t("home.workflows.val4c", "If behaviour falls outside expected operation")],
+      [t("home.workflows.label4", "Action"), t("home.workflows.val4d", "Alert raised")],
+      [t("home.workflows.label5", "Result"), t("home.workflows.val4e", "Maintenance response")],
     ],
   },
 ];
 
-const architecture = [
-  { t: "Physical Site", d: "Meters • Sensors • Equipment • Assets" },
-  { t: "Connectivity", d: "IoT • Edge Devices • Gateways • Communication" },
-  { t: "HubTwinX Digital Twin", d: "Site • Floors • Rooms • Assets • Energy • Equipment" },
-  { t: "Intelligence", d: "Analytics • AI • Alerts • Prediction • Optimization" },
-  { t: "Action", d: "Monitor • Control • Automate • Optimize" },
+const getArchitecture = (t: any) => [
+  { t: t("home.architecture.t1", "Physical Site"), d: t("home.architecture.d1", "Meters • Sensors • Equipment • Assets") },
+  { t: t("home.architecture.t2", "Connectivity"), d: t("home.architecture.d2", "IoT • Edge Devices • Gateways • Communication") },
+  { t: t("home.architecture.t3", "HubTwinX Digital Twin"), d: t("home.architecture.d3", "Site • Floors • Rooms • Assets • Energy • Equipment") },
+  { t: t("home.architecture.t4", "Intelligence"), d: t("home.architecture.d4", "Analytics • AI • Alerts • Prediction • Optimization") },
+  { t: t("home.architecture.t5", "Action"), d: t("home.architecture.d5", "Monitor • Control • Automate • Optimize") },
 ];
 
 function HubTwinX() {
+  const { t } = useTranslation();
+  const scrollStory = getScrollStory(t);
+  const capabilities = getCapabilities(t);
+  const applications = getApplications(t);
+  const whyItems = getWhyItems(t);
+  const workflows = getWorkflows(t);
+  const architecture = getArchitecture(t);
+
   return (
     <div id="top" className="overflow-x-hidden">
       <Nav />
@@ -189,19 +198,17 @@ function HubTwinX() {
           />
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[1.02fr_1fr] lg:px-8">
             <Reveal>
-              <p className="eyebrow">Digital Twin platform • EnerSpace Technology LLP</p>
+              <p className="eyebrow">{t("home.hero.eyebrow", "Digital Twin platform • EnerSpace Technology LLP")}</p>
               <h1 className="mt-5 font-display text-[2.6rem] font-bold leading-[0.98] sm:text-6xl xl:text-6xl">
-                YOUR ENTIRE HUB.
+                {t("home.hero.title1", "YOUR ENTIRE HUB.")}
                 <br />
-                <span className="text-gradient-brand">ONE DIGITAL VIEW.</span>
+                <span className="text-gradient-brand">{t("home.hero.title2", "ONE DIGITAL VIEW.")}</span>
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                HubTwinX™ transforms your home, office, factory, hospital, hotel, campus or
-                commercial facility into an intelligent Digital Twin.
+                {t("home.hero.subtitle", "HubTwinX™ transforms your home, office, factory, hospital, hotel, campus or commercial facility into an intelligent Digital Twin.")}
               </p>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-                See your energy, assets, equipment, spaces and connected systems in one unified
-                digital environment — and monitor, analyze and control them from a single interface.
+                {t("home.hero.subcopy", "See your energy, assets, equipment, spaces and connected systems in one unified digital environment — and monitor, analyze and control them from a single interface.")}
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <a
@@ -209,17 +216,17 @@ function HubTwinX() {
                   className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold text-primary-foreground transition-transform duration-300 hover:scale-[1.03]"
                   style={{ backgroundImage: "var(--gradient-brand)" }}
                 >
-                  Explore HubTwinX <ArrowRight className="size-4" />
+                  {t("home.hero.explore", "Explore HubTwinX")} <ArrowRight className="size-4" />
                 </a>
                 <Link
                   to="/demo"
                   className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 font-semibold transition-colors hover:border-primary/60 hover:bg-secondary/50"
                 >
-                  Book a Demo
+                  {t("home.hero.demo", "Book a Demo")}
                 </Link>
               </div>
               <p className="mt-10 font-display text-sm tracking-[0.2em] text-muted-foreground">
-                POWER REACHES THE SITE. HUBTWINX MAKES THE SITE INTELLIGENT.
+                {t("home.hero.footer", "POWER REACHES THE SITE. HUBTWINX MAKES THE SITE INTELLIGENT.")}
               </p>
             </Reveal>
 
@@ -241,9 +248,9 @@ function HubTwinX() {
         <section className="border-y border-border bg-secondary/20 py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <SectionHeading
-              eyebrow="The journey"
-              title="Power → Meter → Site → Intelligence → Action"
-              copy="One continuous story: from the moment energy reaches your site to the moment your site starts operating intelligently."
+              eyebrow={t("home.headings.howItWorks", "The journey")}
+              title={t("home.headings.howItWorksTitle", "Power → Meter → Site → Intelligence → Action")}
+              copy={t("home.headings.howItWorksCopy", "One continuous story: from the moment energy reaches your site to the moment your site starts operating intelligently.")}
             />
             <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {scrollStory.map((s, i) => (
@@ -266,15 +273,15 @@ function HubTwinX() {
           <div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-2 lg:items-center lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="What is HubTwinX"
-                title={<>YOUR SITE, DIGITALLY CONNECTED.</>}
-                copy="Facilities contain many interconnected elements — electrical panels, meters, HVAC, lighting, solar, batteries, EV chargers, machines, rooms, equipment and sensors. Traditionally, these systems operate through separate applications and disconnected controls. HubTwinX brings them together."
+                eyebrow={t("home.connected.eyebrow", "What is HubTwinX")}
+                title={<>{t("home.connected.title", "YOUR SITE, DIGITALLY CONNECTED.")}</>}
+                copy={t("home.connected.copy", "Facilities contain many interconnected elements — electrical panels, meters, HVAC, lighting, solar, batteries, EV chargers, machines, rooms, equipment and sensors. Traditionally, these systems operate through separate applications and disconnected controls. HubTwinX brings them together.")}
               />
               <ul className="mt-8 space-y-4">
                 {[
-                  "What you have physically, you can see digitally.",
-                  "What you see digitally, you can understand intelligently.",
-                  "What you understand, you can control.",
+                  t("home.connected.list1", "What you have physically, you can see digitally."),
+                  t("home.connected.list2", "What you see digitally, you can understand intelligently."),
+                  t("home.connected.list3", "What you understand, you can control."),
                 ].map((line, i) => (
                   <li key={line} className="flex items-start gap-3">
                     <span
@@ -292,7 +299,7 @@ function HubTwinX() {
 
             <Reveal delay={100}>
               <div className="surface-panel p-6">
-                <p className="eyebrow">Disconnected systems → one digital twin</p>
+                <p className="eyebrow">{t("home.connected.diagramTitle", "Disconnected systems → one digital twin")}</p>
                 <svg viewBox="0 0 460 380" className="mt-4 w-full" role="img" aria-label="Separate site systems connecting into one HubTwinX digital environment">
                   <defs>
                     <linearGradient id="connGrad" x1="0" y1="0" x2="460" y2="380" gradientUnits="userSpaceOnUse">
@@ -302,14 +309,14 @@ function HubTwinX() {
                     </linearGradient>
                   </defs>
                   {[
-                    ["Panels", 60, 46],
-                    ["Meters", 230, 30],
-                    ["HVAC", 400, 46],
-                    ["Lighting", 34, 190],
-                    ["Solar", 426, 190],
-                    ["Battery", 60, 334],
-                    ["EV", 230, 350],
-                    ["Sensors", 400, 334],
+                    [t("home.connected.node1", "Panels"), 60, 46],
+                    [t("home.connected.node2", "Meters"), 230, 30],
+                    [t("home.connected.node3", "HVAC"), 400, 46],
+                    [t("home.connected.node4", "Lighting"), 34, 190],
+                    [t("home.connected.node5", "Solar"), 426, 190],
+                    [t("home.connected.node6", "Battery"), 60, 334],
+                    [t("home.connected.node7", "EV"), 230, 350],
+                    [t("home.connected.node8", "Sensors"), 400, 334],
                   ].map(([label, x, y]) => (
                     <g key={label as string}>
                       <line
@@ -348,15 +355,15 @@ function HubTwinX() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="One display"
+                eyebrow={t("home.headings.capabilities", "One display")}
                 title={
                   <>
-                    ONE DISPLAY.
+                    {t("home.headings.displayTitle1", "ONE DISPLAY.")}
                     <br />
-                    <span className="text-gradient-brand">YOUR ENTIRE HUB.</span>
+                    <span className="text-gradient-brand">{t("home.headings.displayTitle2", "YOUR ENTIRE HUB.")}</span>
                   </>
                 }
-                copy="See everything from one place — energy, electrical infrastructure, solar, battery, EV charging, HVAC, lighting, machines, rooms, environmental conditions, IoT sensors and alerts."
+                copy={t("home.headings.displayCopy", "See everything from one place — energy, electrical infrastructure, solar, battery, EV charging, HVAC, lighting, machines, rooms, environmental conditions, IoT sensors and alerts.")}
               />
             </Reveal>
             <Reveal delay={120}>
@@ -372,9 +379,9 @@ function HubTwinX() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="Digital twin"
-                title="LAYER BY LAYER, YOUR SITE BECOMES DIGITAL."
-                copy="Scroll through the layers of the twin — from the site itself down to the operations that keep it running."
+                eyebrow={t("home.layersTitle.eyebrow", "Digital twin")}
+                title={t("home.layersTitle.title", "LAYER BY LAYER, YOUR SITE BECOMES DIGITAL.")}
+                copy={t("home.layersTitle.copy", "Scroll through the layers of the twin — from the site itself down to the operations that keep it running.")}
               />
             </Reveal>
             <TwinLayers />
@@ -406,14 +413,19 @@ function HubTwinX() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="From visibility to action"
-                title="CONTROL AT YOUR FINGERTIPS."
-                copy="HubTwinX is not only a monitoring platform. It acts as the digital control layer of the site — switch equipment on or off, control lighting, adjust HVAC, manage EV charging, optimize battery usage, manage solar energy, monitor critical equipment, set operating schedules, respond to alerts and automate predefined actions."
+                eyebrow={t("home.control.eyebrow", "From visibility to action")}
+                title={t("home.control.title", "CONTROL AT YOUR FINGERTIPS.")}
+                copy={t("home.control.copy", "HubTwinX is not only a monitoring platform. It acts as the digital control layer of the site — switch equipment on or off, control lighting, adjust HVAC, manage EV charging, optimize battery usage, manage solar energy, monitor critical equipment, set operating schedules, respond to alerts and automate predefined actions.")}
               />
               <div className="mt-8 flex flex-wrap items-center gap-3 font-display text-sm tracking-[0.18em]">
-                {["SEE", "UNDERSTAND", "DECIDE", "ACT"].map((s, i) => (
-                  <span key={s} className="flex items-center gap-3">
-                    <span className="rounded-full border border-border px-4 py-2">{s}</span>
+                {[
+                  t("home.control.v1", "SEE"), 
+                  t("home.control.v2", "UNDERSTAND"), 
+                  t("home.control.v3", "DECIDE"), 
+                  t("home.control.v4", "ACT")
+                ].map((s, i) => (
+                  <span key={s as string} className="flex items-center gap-3">
+                    <span className="rounded-full border border-border px-4 py-2">{s as string}</span>
                     {i < 3 && <ArrowRight className="size-4 text-brand-cyan" />}
                   </span>
                 ))}
@@ -432,17 +444,17 @@ function HubTwinX() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="Technology"
-                title="FROM DATA TO DECISIONS."
-                copy="IoT captures what is happening. The Digital Twin shows where and how it is happening. AI helps understand what it means. Automation helps take action."
+                eyebrow={t("home.technology.eyebrow", "Technology")}
+                title={t("home.technology.title", "FROM DATA TO DECISIONS.")}
+                copy={t("home.technology.copy", "IoT captures what is happening. The Digital Twin shows where and how it is happening. AI helps understand what it means. Automation helps take action.")}
               />
             </Reveal>
             <ul className="mt-12 grid gap-4 lg:grid-cols-4">
               {[
-                { icon: Radio, k: "IoT", v: "Capture" },
-                { icon: Layers, k: "Digital Twin", v: "Visualize" },
-                { icon: Cpu, k: "AI", v: "Understand" },
-                { icon: Workflow, k: "Automation", v: "Act" },
+                { icon: Radio, k: t("home.techFlow.t1", "IoT"), v: t("home.techFlow.v1", "Capture") },
+                { icon: Layers, k: t("home.techFlow.t2", "Digital Twin"), v: t("home.techFlow.v2", "Visualize") },
+                { icon: Cpu, k: t("home.techFlow.t3", "AI"), v: t("home.techFlow.v3", "Understand") },
+                { icon: Workflow, k: t("home.techFlow.t4", "Automation"), v: t("home.techFlow.v4", "Act") },
               ].map((s, i) => {
                 const Icon = s.icon;
                 return (
@@ -473,19 +485,19 @@ function HubTwinX() {
                 />
                 <div>
                   <SectionHeading
-                    eyebrow="Intelligence"
-                    title="INTELLIGENCE BEHIND THE SITE."
-                    copy="HubTwinX uses connected data and intelligent analytics to help organizations understand how their site operates."
+                    eyebrow={t("home.intelligence.eyebrow", "Intelligence")}
+                    title={t("home.intelligence.title", "INTELLIGENCE BEHIND THE SITE.")}
+                    copy={t("home.intelligence.copy", "HubTwinX uses connected data and intelligent analytics to help organizations understand how their site operates.")}
                   />
                   <ul className="mt-7 grid gap-3 sm:grid-cols-2">
                     {[
-                      "Unusual energy consumption",
-                      "Equipment abnormalities",
-                      "Peak demand patterns",
-                      "Energy wastage",
-                      "Operational inefficiencies",
-                      "Potential equipment failures",
-                      "Optimization opportunities",
+                      t("home.intelligence.li1", "Unusual energy consumption"),
+                      t("home.intelligence.li2", "Equipment abnormalities"),
+                      t("home.intelligence.li3", "Peak demand patterns"),
+                      t("home.intelligence.li4", "Energy wastage"),
+                      t("home.intelligence.li5", "Operational inefficiencies"),
+                      t("home.intelligence.li6", "Potential equipment failures"),
+                      t("home.intelligence.li7", "Optimization opportunities"),
                     ].map((sig) => (
                       <li
                         key={sig}
@@ -507,14 +519,14 @@ function HubTwinX() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="Automation"
+                eyebrow={t("home.automation.eyebrow", "Automation")}
                 title={
                   <>
-                    SEE IT. UNDERSTAND IT.{" "}
-                    <span className="text-gradient-brand">AUTOMATE IT.</span>
+                    {t("home.automation.title1", "SEE IT. UNDERSTAND IT.")}{" "}
+                    <span className="text-gradient-brand">{t("home.automation.title2", "AUTOMATE IT.")}</span>
                   </>
                 }
-                copy="Examples of automation logic that can be expressed inside HubTwinX. These illustrate how rules and workflows are structured."
+                copy={t("home.automation.copy", "Examples of automation logic that can be expressed inside HubTwinX. These illustrate how rules and workflows are structured.")}
               />
             </Reveal>
             <div className="mt-12 grid gap-5 lg:grid-cols-2">
@@ -555,9 +567,9 @@ function HubTwinX() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="Applications"
-                title="BUILT FOR EVERY TYPE OF SITE."
-                copy="One platform, applied across residential, commercial, industrial, healthcare, hospitality, institutional and energy sites."
+                eyebrow={t("home.headings.applications", "Applications")}
+                title={t("home.headings.applicationsTitle", "BUILT FOR EVERY TYPE OF SITE.")}
+                copy={t("home.headings.applicationsCopy", "One platform, applied across residential, commercial, industrial, healthcare, hospitality, institutional and energy sites.")}
               />
             </Reveal>
             <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -589,15 +601,15 @@ function HubTwinX() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="Platform capabilities"
+                eyebrow={t("home.headings.capabilities", "Platform capabilities")}
                 title={
                   <>
-                    ONE PLATFORM.
+                    {t("home.headings.capabilitiesTitle1", "ONE PLATFORM.")}
                     <br />
-                    <span className="text-gradient-brand">MULTIPLE POSSIBILITIES.</span>
+                    <span className="text-gradient-brand">{t("home.headings.capabilitiesTitle2", "MULTIPLE POSSIBILITIES.")}</span>
                   </>
                 }
-                copy="Six capability areas that operate as one connected digital ecosystem — not six unrelated tools."
+                copy={t("home.headings.capabilitiesCopy", "Six capability areas that operate as one connected digital ecosystem — not six unrelated tools.")}
               />
             </Reveal>
             <div className="relative mt-12">
@@ -628,9 +640,9 @@ function HubTwinX() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="Architecture"
-                title="FROM PHYSICAL SITE TO INTELLIGENT ACTION."
-                copy="A continuous pipeline that carries data from the physical world into intelligence and back into action."
+                eyebrow={t("home.headings.architecture", "Architecture")}
+                title={t("home.headings.architectureTitle", "FROM PHYSICAL SITE TO INTELLIGENT ACTION.")}
+                copy={t("home.headings.architectureCopy", "A continuous pipeline that carries data from the physical world into intelligence and back into action.")}
               />
             </Reveal>
             <div className="mt-12 grid gap-4 lg:grid-cols-5">
@@ -669,9 +681,9 @@ function HubTwinX() {
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
               <SectionHeading
-                eyebrow="The ecosystem"
-                title="FROM THE GRID TO THE SITE."
-                copy="PowerTwinX™ and HubTwinX™ are two connected halves of one digital journey."
+                eyebrow={t("home.powertwinx.eyebrow", "The ecosystem")}
+                title={t("home.powertwinx.title", "FROM THE GRID TO THE SITE.")}
+                copy={t("home.powertwinx.copy", "PowerTwinX™ and HubTwinX™ are two connected halves of one digital journey.")}
               />
             </Reveal>
 
@@ -691,10 +703,16 @@ function HubTwinX() {
                 <div className="surface-panel h-full p-6">
                   <img src="/logo-ptx.png" alt="PowerTwinX" className="h-7 w-auto object-contain" />
                   <p className="mt-3 font-display text-xl font-semibold">
-                    The digital twin of the power network
+                    {t("home.powertwinx.leftTitle", "The digital twin of the power network")}
                   </p>
                   <ol className="mt-5 space-y-2 text-sm text-muted-foreground">
-                    {["Generation", "Transmission", "Distribution", "Transformer", "Smart Meter"].map(
+                    {[
+                      t("home.powertwinx.l1", "Generation"), 
+                      t("home.powertwinx.l2", "Transmission"), 
+                      t("home.powertwinx.l3", "Distribution"), 
+                      t("home.powertwinx.l4", "Transformer"), 
+                      t("home.powertwinx.l5", "Smart Meter")
+                    ].map(
                       (s) => (
                         <li key={s} className="rounded-lg border border-border bg-secondary/30 px-4 py-2.5">
                           {s}
@@ -712,7 +730,7 @@ function HubTwinX() {
                     className="rounded-full px-5 py-2 font-display text-xs tracking-[0.24em] text-primary-foreground"
                     style={{ backgroundImage: "var(--gradient-brand)" }}
                   >
-                    THE METER
+                    {t("home.powertwinx.centerLabel", "THE METER")}
                   </span>
                   <span className="hidden h-full w-px bg-border lg:block" />
                 </div>
@@ -722,10 +740,18 @@ function HubTwinX() {
                 <div className="surface-panel h-full p-6">
                   <img src="/hubtwinx.png" alt="HubTwinX" className="h-7 w-auto object-contain" />
                   <p className="mt-3 font-display text-xl font-semibold">
-                    The digital twin of the end-user site
+                    {t("home.powertwinx.rightTitle", "The digital twin of the end-user site")}
                   </p>
                   <ol className="mt-5 space-y-2 text-sm text-muted-foreground">
-                    {["Meter", "Site", "Assets", "Equipment", "Energy", "Intelligence", "Control"].map(
+                    {[
+                      t("home.powertwinx.r1", "Meter"), 
+                      t("home.powertwinx.r2", "Site"), 
+                      t("home.powertwinx.r3", "Assets"), 
+                      t("home.powertwinx.r4", "Equipment"), 
+                      t("home.powertwinx.r5", "Energy"), 
+                      t("home.powertwinx.r6", "Intelligence"), 
+                      t("home.powertwinx.r7", "Control")
+                    ].map(
                       (s) => (
                         <li key={s} className="rounded-lg border border-border bg-secondary/30 px-4 py-2.5">
                           {s}
@@ -739,8 +765,8 @@ function HubTwinX() {
 
             <Reveal delay={120}>
               <p className="mx-auto mt-12 max-w-4xl text-center font-display text-xl leading-snug sm:text-3xl">
-                TOGETHER, THEY CONNECT THE DIGITAL JOURNEY FROM{" "}
-                <span className="text-gradient-brand">POWER SOURCE TO POINT OF CONSUMPTION.</span>
+                {t("home.powertwinx.footer1", "TOGETHER, THEY CONNECT THE DIGITAL JOURNEY FROM")}{" "}
+                <span className="text-gradient-brand">{t("home.powertwinx.footer2", "POWER SOURCE TO POINT OF CONSUMPTION.")}</span>
               </p>
             </Reveal>
           </div>
@@ -750,7 +776,10 @@ function HubTwinX() {
         <section className="py-20 sm:py-28">
           <div className="mx-auto max-w-7xl px-5 lg:px-8">
             <Reveal>
-              <SectionHeading eyebrow="Why HubTwinX" title="WHY HUBTWINX?" />
+              <SectionHeading 
+                eyebrow={t("home.headings.why", "Why HubTwinX")} 
+                title={t("home.headings.whyTitle", "WHY HUBTWINX?")} 
+              />
             </Reveal>
             <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {whyItems.map((w, i) => {
@@ -774,7 +803,7 @@ function HubTwinX() {
                 >
                   <Timer className="size-6" />
                   <p className="mt-5 font-display text-lg font-semibold leading-snug">
-                    What exists physically, exists digitally.
+                    {t("home.why.extra", "What exists physically, exists digitally.")}
                   </p>
                 </div>
               </Reveal>
@@ -802,18 +831,15 @@ function HubTwinX() {
           />
           <div className="mx-auto max-w-4xl px-5 text-center lg:px-8">
             <Reveal>
-              <p className="eyebrow">Our vision</p>
+              <p className="eyebrow">{t("home.vision.eyebrow", "Our vision")}</p>
               <h2 className="mt-5 font-display text-4xl font-bold leading-[1.02] sm:text-6xl">
-                MAKE EVERY SITE <span className="text-gradient-brand">INTELLIGENT.</span>
+                {t("home.vision.title1", "MAKE EVERY SITE")} <span className="text-gradient-brand">{t("home.vision.title2", "INTELLIGENT.")}</span>
               </h2>
               <p className="mt-7 text-lg leading-relaxed text-muted-foreground">
-                We believe the future of buildings, industries and infrastructure is not simply
-                connected. It is understood.
+                {t("home.vision.p1", "We believe the future of buildings, industries and infrastructure is not simply connected. It is understood.")}
               </p>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                HubTwinX aims to create a digital representation of every important element of a
-                site — allowing people and organizations to see, understand, optimize and control
-                their physical environment through one intelligent digital interface.
+                {t("home.vision.p2", "HubTwinX aims to create a digital representation of every important element of a site — allowing people and organizations to see, understand, optimize and control their physical environment through one intelligent digital interface.")}
               </p>
             </Reveal>
           </div>
@@ -825,11 +851,11 @@ function HubTwinX() {
             <Reveal>
               <img src="/hubtwinx.png" alt="HubTwinX" width={320} height={85} className="mx-auto h-12 w-auto" loading="lazy" />
               <h2 className="mt-9 font-display text-3xl font-bold leading-[1.05] sm:text-5xl">
-                READY TO SEE YOUR ENTIRE HUB{" "}
-                <span className="text-gradient-brand">DIFFERENTLY?</span>
+                {t("home.cta.title1", "READY TO SEE YOUR ENTIRE HUB")}{" "}
+                <span className="text-gradient-brand">{t("home.cta.title2", "DIFFERENTLY?")}</span>
               </h2>
               <p className="mt-5 text-lg text-muted-foreground">
-                Discover how HubTwinX can create a Digital Twin of your facility.
+                {t("home.cta.subtitle", "Discover how HubTwinX can create a Digital Twin of your facility.")}
               </p>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
                 <Link
@@ -837,17 +863,17 @@ function HubTwinX() {
                   className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold text-primary-foreground transition-transform duration-300 hover:scale-[1.03]"
                   style={{ backgroundImage: "var(--gradient-brand)" }}
                 >
-                  BOOK A DEMO <ArrowRight className="size-4" />
+                  {t("home.cta.btn1", "BOOK A DEMO")} <ArrowRight className="size-4" />
                 </Link>
                 <a
                   href="#platform"
                   className="inline-flex items-center rounded-full border border-border px-8 py-4 font-semibold transition-colors hover:border-primary/60 hover:bg-secondary/50"
                 >
-                  EXPLORE HUBTWINX
+                  {t("home.cta.btn2", "EXPLORE HUBTWINX")}
                 </a>
               </div>
               <p className="mt-10 font-display text-sm tracking-[0.16em] text-muted-foreground">
-                YOUR ENTIRE HUB. ONE DIGITAL VIEW. EVERYTHING AT YOUR FINGERTIPS.
+                {t("home.cta.footer", "YOUR ENTIRE HUB. ONE DIGITAL VIEW. EVERYTHING AT YOUR FINGERTIPS.")}
               </p>
             </Reveal>
           </div>

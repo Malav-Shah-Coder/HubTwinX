@@ -3,6 +3,7 @@ import { Mail, MapPin, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { sendDemoEmail } from "@/actions/email";
+import { useTranslation } from "react-i18next";
 
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
@@ -19,6 +20,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactUs() {
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,13 +33,13 @@ function ContactUs() {
 
     try {
       await sendDemoEmail({ data });
-      toast.success("Message sent successfully!", {
-        description: "Our team will review your inquiry and reach out soon."
+      toast.success(t("contact.toast.successTitle", "Message sent successfully!"), {
+        description: t("contact.toast.successDesc", "Our team will review your inquiry and reach out soon.")
       });
       (e.target as HTMLFormElement).reset();
     } catch (error) {
-      toast.error("Failed to send message", {
-        description: "Please check your network and try again."
+      toast.error(t("contact.toast.errorTitle", "Failed to send message"), {
+        description: t("contact.toast.errorDesc", "Please check your network and try again.")
       });
     } finally {
       setIsSubmitting(false);
@@ -51,12 +53,12 @@ function ContactUs() {
         <section className="px-5 lg:px-8 max-w-7xl mx-auto">
           <Reveal>
             <div className="max-w-3xl mb-16">
-              <p className="eyebrow">Get in touch</p>
+              <p className="eyebrow">{t("contact.hero.eyebrow", "Get in touch")}</p>
               <h1 className="mt-5 font-display text-[2.4rem] font-bold leading-[0.98] sm:text-5xl">
-                CONTACT <span className="text-gradient-brand">US</span>
+                {t("contact.hero.title1", "CONTACT")} <span className="text-gradient-brand">{t("contact.hero.title2", "US")}</span>
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Whether you want to request a demo, inquire about partnerships, or just learn more about HubTwinX, our team is ready to answer all your questions.
+                {t("contact.hero.copy", "Whether you want to request a demo, inquire about partnerships, or just learn more about HubTwinX, our team is ready to answer all your questions.")}
               </p>
             </div>
           </Reveal>
@@ -64,89 +66,96 @@ function ContactUs() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Left Column: Form */}
             <Reveal delay={100}>
-              <div className="surface-panel p-6 sm:p-8 rounded-2xl">
-                <form className="space-y-6" onSubmit={handleSubmit}>
+              <div className="relative group h-full">
+                {/* Gradient Glow Shadow */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-cyan/60 via-brand-cyan/30 to-brand-green/60 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition duration-1000 group-hover:duration-500"></div>
+                
+                {/* The Form Box */}
+                <div className="surface-panel p-6 sm:p-8 rounded-2xl relative bg-background/95 backdrop-blur-xl h-full">
+                  <div className="absolute top-0 left-0 p-32 bg-brand-cyan/5 rounded-full blur-3xl -ml-10 -mt-10 pointer-events-none"></div>
+                  
+                  <form className="space-y-6 relative" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label htmlFor="firstName" className="text-sm font-medium text-foreground">First Name</label>
+                      <label htmlFor="firstName" className="text-sm font-medium text-foreground">{t("contact.form.firstName", "First Name")}</label>
                       <input 
                         type="text" 
                         id="firstName" 
                         name="First Name"
                         required
                         className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50" 
-                        placeholder="John" 
+                        placeholder={t("contact.form.placeholder.fname", "John")} 
                       />
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="lastName" className="text-sm font-medium text-foreground">Last Name</label>
+                      <label htmlFor="lastName" className="text-sm font-medium text-foreground">{t("contact.form.lastName", "Last Name")}</label>
                       <input 
                         type="text" 
                         id="lastName" 
                         name="Last Name"
                         required
                         className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50" 
-                        placeholder="Doe" 
+                        placeholder={t("contact.form.placeholder.lname", "Doe")} 
                       />
                     </div>
                   </div>
                   
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
+                    <label htmlFor="email" className="text-sm font-medium text-foreground">{t("contact.form.email", "Email")}</label>
                     <input 
                       type="email" 
                       id="email" 
                       name="Email Address"
                       required
                       className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50" 
-                      placeholder="john@example.com" 
+                      placeholder={t("contact.form.placeholder.email", "john@example.com")} 
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="organization" className="text-sm font-medium text-foreground">Organization (Org)</label>
+                    <label htmlFor="organization" className="text-sm font-medium text-foreground">{t("contact.form.org", "Organization (Org)")}</label>
                     <input 
                       type="text" 
                       id="organization" 
                       name="Organization"
                       required
                       className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50" 
-                      placeholder="Company Name" 
+                      placeholder={t("contact.form.placeholder.org", "Company Name")} 
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="inquiryType" className="text-sm font-medium text-foreground">Inquiry Type</label>
+                    <label htmlFor="inquiryType" className="text-sm font-medium text-foreground">{t("contact.form.inquiry", "Inquiry Type")}</label>
                     <select 
                       id="inquiryType" 
                       name="Inquiry Type"
                       required
                       className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 text-foreground"
                     >
-                      <option value="">Select an option...</option>
-                      <option value="demo">Request a Demo</option>
-                      <option value="sales">Sales Inquiry</option>
-                      <option value="support">Technical Support</option>
-                      <option value="other">Other</option>
+                      <option value="">{t("contact.form.selectOption", "Select an option...")}</option>
+                      <option value="demo">{t("contact.form.reqDemo", "Request a Demo")}</option>
+                      <option value="sales">{t("contact.form.sales", "Sales Inquiry")}</option>
+                      <option value="support">{t("contact.form.support", "Technical Support")}</option>
+                      <option value="other">{t("contact.form.other", "Other")}</option>
                     </select>
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-foreground">Message</label>
+                    <label htmlFor="message" className="text-sm font-medium text-foreground">{t("contact.form.message", "Message")}</label>
                     <textarea 
                       id="message" 
                       name="Message"
                       rows={4}
                       required
                       className="w-full bg-background border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 resize-none" 
-                      placeholder="How can we help you?" 
+                      placeholder={t("contact.form.placeholder.message", "How can we help you?")} 
                     />
                   </div>
 
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-8 py-3.5 font-semibold text-primary-foreground transition-transform duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:pointer-events-none"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-8 py-3.5 font-semibold text-primary-foreground shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] disabled:opacity-70 disabled:pointer-events-none"
                     style={{ backgroundImage: "var(--gradient-brand)" }}
                   >
                     {isSubmitting ? (
@@ -154,9 +163,10 @@ function ContactUs() {
                     ) : (
                       <Send className="size-4" />
                     )}
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {isSubmitting ? t("contact.form.btnSending", "Sending...") : t("contact.form.btnSend", "Send Message")}
                   </button>
                 </form>
+               </div>
               </div>
             </Reveal>
 
@@ -169,8 +179,8 @@ function ContactUs() {
                       <Mail className="size-6" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg">Email Us</h4>
-                      <p className="text-muted-foreground mt-1 text-sm mb-2">For any inquiries, reach out via email.</p>
+                      <h4 className="font-semibold text-lg">{t("contact.info.emailTitle", "Email Us")}</h4>
+                      <p className="text-muted-foreground mt-1 text-sm mb-2">{t("contact.info.emailCopy", "For any inquiries, reach out via email.")}</p>
                       <a href="mailto:info@hubtwinx.com" className="text-brand-cyan hover:underline font-medium">info@hubtwinx.com</a>
                     </div>
                   </div>
@@ -180,13 +190,8 @@ function ContactUs() {
                       <MapPin className="size-6" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg">Corporate Headquarters</h4>
-                      <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
-                        EnerSpace Technology LLP<br/>
-                        H 308 Titanium City Center, 100 ft Road<br/>
-                        Prahlad Nagar, Satellite<br/>
-                        Ahmedabad 380015, Gujarat, India
-                      </p>
+                      <h4 className="font-semibold text-lg">{t("contact.info.hqTitle", "Corporate Headquarters")}</h4>
+                      <p className="text-muted-foreground mt-1 text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: t("contact.info.hqCopy", "EnerSpace Technology LLP<br/>H 308 Titanium City Center, 100 ft Road<br/>Prahlad Nagar, Satellite<br/>Ahmedabad 380015, Gujarat, India") }} />
                     </div>
                   </div>
                 </div>
