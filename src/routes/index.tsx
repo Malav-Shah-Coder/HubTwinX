@@ -343,7 +343,7 @@ function HubTwinX() {
                   ))}
                   <circle cx="230" cy="190" r="52" fill="oklch(0.55 0.16 253 / 18%)" stroke="url(#connGrad)" strokeWidth="1.6" />
                   <circle cx="230" cy="190" r="70" fill="none" stroke="url(#connGrad)" strokeWidth="0.8" opacity="0.4" className="pulse-node" />
-                  <image href="/Logo.png" x="190" y="150" width="80" height="80" />
+                  <image href="/chip.png" x="120" y="70" width="220" height="220" />
                 </svg>
               </div>
             </Reveal>
